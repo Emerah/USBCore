@@ -1,0 +1,5 @@
+module Clibusb {
+    header "USBShim.h"
+    link "libusb-1.0"
+    export *
+}

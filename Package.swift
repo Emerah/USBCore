@@ -5,19 +5,10 @@ import PackageDescription
 
 let package = Package(
     name: "USBCore",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "USBCore",
-            targets: ["USBCore"]),
-    ],
+    platforms: [.macOS(.v14)],
+    products: [.library(name: "USBCore", targets: ["USBCore"])],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "USBCore"),
-        .testTarget(
-            name: "USBCoreTests",
-            dependencies: ["USBCore"]),
+        .systemLibrary(name: "Clibusb", path: "Sources/Clibusb", pkgConfig: "libusb-1.0", providers: [.brew(["libusb"])]),
+        .target(name: "USBCore", dependencies: [.target(name: "Clibusb")])
     ]
 )
