@@ -2,7 +2,7 @@
 importing this package to your Swift code will make C libusb functions available to your Swift code.
 
   - add this package as a dependency to your Xcode project
-  - add import statement to the top of your file [**import Clibusb**]
+  - add import statement to the top of your file [**import USBCore**]
 
 ### Platform:
 development platform is macOS v14.
