@@ -103,8 +103,8 @@ public func libusbGetPortNumber(_ device: LibusbDevice?) -> UInt8 {
 }
 
 
-public func libusbGetPortNumbers(_ device: LibusbDevice?, portNumbers: UnsafeMutablePointer<UInt8>?, portNumbersLength: Int) {
-    let result = libusb_get_port_numbers(device, portNumbers, Int32(portNumbersLength))
+public func libusbGetPortNumbers(_ device: LibusbDevice?, portNumbers: UnsafeMutablePointer<UInt8>?, portNumbersLength: Int32) {
+    let result = libusb_get_port_numbers(device, portNumbers, portNumbersLength)
     handlePossibleError(result)
 }
 
@@ -136,8 +136,8 @@ public func libusbGetMaxISOPacketSize(_ device: LibusbDevice?, endpoint: UInt8) 
 }
 
 
-public func libusbgetMaxALTPacketSize(_ device: LibusbDevice?, interfaceNumber: Int, altSetting: Int, endpoint: UInt8) -> Int {
-    return Int(libusb_get_max_alt_packet_size(device, Int32(interfaceNumber), Int32(altSetting), endpoint))
+public func libusbgetMaxALTPacketSize(_ device: LibusbDevice?, interfaceNumber: Int32, altSetting: Int32, endpoint: UInt8) -> Int {
+    return Int(libusb_get_max_alt_packet_size(device, interfaceNumber, altSetting, endpoint))
 }
 
 
@@ -313,13 +313,13 @@ public func libusbFillControlSetup(buffer: UnsafeMutablePointer<UInt8>?, request
 }
 
 
-public func libusbFillControlTransfer(buffer: UnsafeMutablePointer<UInt8>?, requestType: UInt8, request: UInt8, wValue: UInt16, wIndex: UInt16, wLength: UInt16) {
-    libusb_fill_control_setup(buffer, requestType, request, wValue, wIndex, wLength)
+public func libusbFillControlTransfer(transfer: UnsafeMutablePointer<libusb_transfer>!, deviceHandle: LibusbHandle, buffer: UnsafeMutablePointer<UInt8>!, callback: LibusbTransferCallback?, userData: UnsafeMutableRawPointer?, timeout: UInt32) {
+    libusb_fill_control_transfer(transfer, deviceHandle, buffer, callback, userData, timeout)
 }
 
 
-public func libusbFillBulkTransfer(transfer: UnsafeMutablePointer<libusb_transfer>?, handle: LibusbHandle?, endpoint: UInt8, buffer: UnsafeMutablePointer<UInt8>?, length: Int, callback: LibusbTransferCallback?, userData: UnsafeMutableRawPointer?, timeout: UInt32) {
-    libusb_fill_bulk_transfer(transfer, handle, endpoint, buffer, Int32(length), callback, userData, timeout)
+public func libusbFillBulkTransfer(transfer: UnsafeMutablePointer<libusb_transfer>?, handle: LibusbHandle?, endpoint: UInt8, buffer: UnsafeMutablePointer<UInt8>?, length: Int32, callback: LibusbTransferCallback?, userData: UnsafeMutableRawPointer?, timeout: UInt32) {
+    libusb_fill_bulk_transfer(transfer, handle, endpoint, buffer, length, callback, userData, timeout)
 }
 
 
@@ -527,7 +527,7 @@ public func libusbGetPollFileDescriptors(context: LibusbContext?) ->  UnsafeMuta
 }
 
 
-public func libusbFreePollFileDescriptors(descriptors: UnsafeMutablePointer<UnsafePointer<libusb_pollfd>?>?) { 
+public func libusbFreePollFileDescriptors(descriptors: UnsafeMutablePointer<UnsafePointer<libusb_pollfd>?>?) {
     libusb_free_pollfds(descriptors)
 }
 
