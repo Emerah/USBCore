@@ -92,7 +92,7 @@ public struct Constants {
     public static let REQUEST_SET_DESCRIPTOR = LIBUSB_REQUEST_SET_DESCRIPTOR.rawValue // Used to update existing descriptors or add new descriptors.
     public static let REQUEST_GET_CONFIGURATION = LIBUSB_REQUEST_GET_CONFIGURATION.rawValue // Get the current device configuration value.
     public static let REQUEST_SET_CONFIGURATION = LIBUSB_REQUEST_SET_CONFIGURATION.rawValue // Set device configuration.
-    public static let REQUEST_GET_INTERFACE = LIBUSB_REQUEST_GET_INTERFACE // Return the selected alternate setting for the specified interface.
+    public static let REQUEST_GET_INTERFACE = LIBUSB_REQUEST_GET_INTERFACE.rawValue // Return the selected alternate setting for the specified interface.
     public static let REQUEST_SET_INTERFACE = LIBUSB_REQUEST_SET_INTERFACE.rawValue // Select an alternate interface for the specified interface.
     public static let REQUEST_SYNCH_FRAME = LIBUSB_REQUEST_SYNCH_FRAME.rawValue // Set then report an endpoint's synchronization frame.
     public static let REQUEST_SET_SEL = LIBUSB_REQUEST_SET_SEL.rawValue // Sets both the U1 and U2 Exit Latency.
